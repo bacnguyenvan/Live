@@ -1,0 +1,46 @@
+{
+  "_from": "tim-upload-plugin",
+  "_id": "tim-upload-plugin@1.0.6",
+  "_inBundle": false,
+  "_integrity": "sha512-yO85EmYQB/lyKo3h90Lruw9VX7RagwJ7QSlCLaiD8KWBsZZaTpuZpr54xw+m5U6TlGwN3/wO8Q4bRmYncLoOnQ==",
+  "_location": "/tim-upload-plugin",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "tim-upload-plugin",
+    "name": "tim-upload-plugin",
+    "escapedName": "tim-upload-plugin",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/tim-upload-plugin/-/tim-upload-plugin-1.0.6.tgz",
+  "_shasum": "c2610d972ff522dadef0eb8c7554b7547fcb8bc8",
+  "_spec": "tim-upload-plugin",
+  "_where": "D:\\projects\\home\\git_p\\Live",
+  "author": {
+    "name": "Tencent Cloud Terminal R&D Center"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "Tencent Cloud Upload To COS SDK for IM",
+  "keywords": [
+    "腾讯云IM",
+    "即时通讯",
+    "通信",
+    "COS"
+  ],
+  "license": "ISC",
+  "main": "index.js",
+  "name": "tim-upload-plugin",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "version": "1.0.6"
+}

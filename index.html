@@ -31,12 +31,12 @@
 		}
 		.live .live-text {
 			position: absolute;
-			left: 41%;
+			left: 38%;
 			background: red;
 			padding: 5px 15px;
 			z-index: 2;
 			color: white;
-			top: 4%;
+			top: 2%;
 			border-radius: 10px;
 		}
 
@@ -45,7 +45,7 @@
 			left: 56%;
 			color: white;
 			z-index: 2;
-    		top: 4%;
+    		top: 2%;
 		}
 
 		.live-chat-input {
@@ -75,7 +75,7 @@
 
 		.live-chat-content {
 			position: absolute;
-			left: 41%;
+			left: 38%;
 			bottom: 18%;
 			color: #ffffff61;
 		}
@@ -144,8 +144,16 @@
 		var url = "webrtc://kitahome.fun/live/kitaWeb_livetp";
 
 		player.src(url); // Playback URL
-
 	</script>
+
+	<!-- tim-js.js 和 tim-upload-plugin.js 可以从 https://github.com/TencentCloud/TIMSDK/tree/master/Web/IMSDK 获取 -->
+
+	<script src="./lib/tim-js.js"></script>
+	<script src="./lib/tim-upload-plugin/index.js"></script>
+
+	<script src="./lib/lib-generate-test-usersig.min.js"></script>
+	<script src="generate-user-sig.js"></script>
+	<script src="chat.js"></script>
 
 </body>
 
