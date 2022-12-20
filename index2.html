@@ -84,6 +84,7 @@
 			display: flex;
 			align-items: center;
 			margin-bottom: 10px;
+            flex-direction: column;
 		}
 		.user-chat img {
 			width: 25%;
@@ -94,13 +95,17 @@
 		}
 		.chat-block {
 			text-align: left;
-		}
+            width: 100%;		}
         .user-join {
             position: absolute;
 			left: 42%;
 			bottom: 42%;
 			color: #ffffff61;
             font-size: 20px;
+        }
+        .user-name{
+            font-weight: bold;
+            color: 30px;
         }
 	</style>
 </head>
@@ -127,18 +132,11 @@
             </div>
 			<div class="live-chat-content">
 				<div class="user-chat">
-					<img src="img/icons-boy.png">
-					<div class="chat-block">
-						<div>Kita</div>
-						<div class="chat-text">Hi Everyone</div>
-					</div>
-				</div>
-				<div class="user-chat">
-					<img src="img/icons-girl.png">
-					<div class="chat-block">
-						<div>taylor swift</div>
-						<div class="chat-text">Have a nice day</div>
-					</div>
+					<!-- <div class="chat-block">
+						<span class="user-name">Kita: </span>
+						<span class="chat-text">Hi Everyone</span>
+					</div> -->
+                    
 				</div>
 			</div>
 			<div class="live-chat-input">

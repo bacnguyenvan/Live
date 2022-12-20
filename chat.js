@@ -1,5 +1,4 @@
 
-alert("okeee")
 
 var options = {
 SDKAppID: 20001658 // Replace 0 with the `SDKAppID` of your IM application when connecting.

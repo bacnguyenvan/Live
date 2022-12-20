@@ -117,18 +117,10 @@
 			</div>
 			<div class="live-chat-content">
 				<div class="user-chat">
-					<img src="img/icons-boy.png">
-					<div class="chat-block">
-						<div>Kita</div>
+					<!-- <div class="chat-block">
+						<span>Kita: </span>
 						<div class="chat-text">Hi Everyone</div>
-					</div>
-				</div>
-				<div class="user-chat">
-					<img src="img/icons-girl.png">
-					<div class="chat-block">
-						<div>taylor swift</div>
-						<div class="chat-text">Have a nice day</div>
-					</div>
+					</div> -->
 				</div>
 			</div>
 			<div class="live-chat-input">
@@ -171,6 +163,8 @@
 					userLogin();
 					joinGroup()
 					userSendMessage(message)
+
+					event.currentTarget.value = "";
 				}
 			});
 

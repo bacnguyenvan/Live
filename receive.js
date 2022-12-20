@@ -45,7 +45,13 @@ promise.then(function(imResponse) {
 let onMessageReceived = function(event) {
   // event.data - An array that stores Message objects - [Message]
   var name = this.makeid(8)
-  $('.user-join-name').text( name + " Đã tham gia" );
+  // $('.user-join-name').text( name + " Đã tham gia" );
+  var data = event.data;
+  if(data.length > 0) {
+    data = data[0];
+    $('.user-chat').append('<div class="chat-block"><span class="user-name">' + data.from + ': </span><span class="chat-text">' + data.payload.text  + '</span></div>')
+  }
+  
   console.log("m: ", event.data)
 };
 tim.on(TIM.EVENT.MESSAGE_RECEIVED, onMessageReceived);
