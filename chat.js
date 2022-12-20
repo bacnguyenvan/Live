@@ -24,7 +24,7 @@ console.log(genTestUserSig);
 // let promise = tim.login({userID: 'kita12345', userSig: genTestUserSig.userSig});
 // This event is triggered when the SDK enters the `ready` status. When detecting this event during listening, you can call SDK APIs such as the message sending API to use various features of the SDK.
 let onSdkReady = function(event) {
-  let message = tim.createTextMessage({ to: 'user1', conversationType: 'C2C', payload: { text: 'Hello world!' }});
+  let message = tim.createTextMessage({ to: 'user1', conversationType: 'C2C', payload: { text: 'Hello world! Ga qua' }});
   tim.sendMessage(message);
 };
 onSdkReady()
