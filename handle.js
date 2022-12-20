@@ -20,10 +20,12 @@ function joinGroup() {
 
 
 function userLogin() {
-    
+    var name = makeid(8)
+    var genTestUser = genTestUserSig({SDKAppID: 20001658, secretKey: 'f6a85dbe41dc1e7d9ba2f49e125276de32714a5c25ada09b5d0f01157da9054b', userID: name});
+
     let onSdkNotReady = function(event) {
         // To use features such as message sending, you need to drive the SDK to enter the `ready` status and then call the login API again as follows:
-        tim.login({userID: 'kita12345', userSig: 'eJwtzMsKgzAQheF3mXWRSUysFboQF*3CUkJvdikkypgqoiGUlr57RV2e78D-hWt*CbwZIAEeIGzmTdp0jiqa2ZIrGQ*FXM9R27LvSUPCEZFFMl7cUWsgYdGWSYlyh4uad0-D5BGKGFcbqZ66LH90d3RO*ecta0LfFFahTrPX8VSoSrfpR7gDr88M7R5*f-2*MS4_'});
+        tim.login({userID: name, userSig: genTestUser.userSig});
       };
       onSdkNotReady()
     tim.on(TIM.EVENT.SDK_NOT_READY, onSdkNotReady);

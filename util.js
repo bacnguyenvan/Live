@@ -7,3 +7,13 @@ function makeid(length) {
     }
     return result;
 }
+
+function genTestUserSig(options) {
+    const { SDKAppID, secretKey, userID } = options;
+    const generator = new LibGenerateTestUserSig(SDKAppID, secretKey, 604800);
+    const userSig = generator.genTestUserSig(userID);
+    return {
+      SDKAppID,
+      userSig,
+    };
+  }
