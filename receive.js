@@ -33,25 +33,10 @@ promise.then(function(imResponse) {
 });
 
 
-// Send a text message. The text message sending process in web apps is the same as that in Mini Programs.
-// 1. Create a message instance. The returned instance can be displayed on the screen.
-let message = tim.createTextMessage({
-    to: 'user1',
-    conversationType: TIM.TYPES.CONV_C2C,
-    payload: {
-      text: 'Hello world!'
-    },
-});
-
-  // 2. Send the message.
-let pro = tim.sendMessage(message);
-
-pro.then(function(imResponse) {
-    // The message is sent successfully.
-    console.log("mes receive: ");
-    console.log(imResponse);
-  
-}).catch(function(imError) {
-    // The message fails to be sent.
-    console.warn('sendMessage error:', imError);
-});
+// This event is triggered when the SDK receives a newly pushed one-to-one message, group message, group tip, or group system message. When this event occurs, you can traverse event.data to obtain the message list and render it to the UI.
+let onMessageReceived = function(event) {
+  // event.data - An array that stores Message objects - [Message]
+  console.log("m: ", event.data)
+};
+tim.on(TIM.EVENT.MESSAGE_RECEIVED, onMessageReceived);
+onMessageReceived()

@@ -21,38 +21,19 @@ var genTestUserSig = genTestUserSig({SDKAppID: 20001658, secretKey: 'f6a85dbe41d
 
 console.log(genTestUserSig);
 
-let promise = tim.login({userID: 'kita12345', userSig: genTestUserSig.userSig});
-promise.then(function(imResponse) {
-  console.log("Login successful")
-  console.log(imResponse.data); // Login successful
-  if (imResponse.data.repeatLogin === true) {
-    // Indicates that the account has logged in and that the current login will be a repeated login. This feature is supported from v2.5.1.
-    console.log(imResponse.data.errorInfo);
-  }
-}).catch(function(imError) {
-  console.warn('login error:', imError); // Error information
-});
+// let promise = tim.login({userID: 'kita12345', userSig: genTestUserSig.userSig});
+// This event is triggered when the SDK enters the `ready` status. When detecting this event during listening, you can call SDK APIs such as the message sending API to use various features of the SDK.
+let onSdkReady = function(event) {
+  let message = tim.createTextMessage({ to: 'user1', conversationType: 'C2C', payload: { text: 'Hello world!' }});
+  tim.sendMessage(message);
+};
+onSdkReady()
+tim.on(TIM.EVENT.SDK_READY, onSdkReady);
 
-
-// Send a text message. The text message sending process in web apps is the same as that in Mini Programs.
-// 1. Create a message instance. The returned instance can be displayed on the screen.
-let message = tim.createTextMessage({
-    to: 'user1',
-    conversationType: TIM.TYPES.CONV_C2C,
-    payload: {
-      text: 'Hello world!'
-    },
-});
-
-  // 2. Send the message.
-let pro = tim.sendMessage(message);
-
-pro.then(function(imResponse) {
-    // The message is sent successfully.
-    console.log("mes receive: ");
-    console.log(imResponse);
-  
-}).catch(function(imError) {
-    // The message fails to be sent.
-    console.warn('sendMessage error:', imError);
-});
+// This event is triggered when the SDK enters the `not ready` status. In this case, you cannot use SDK features such as message sending. To use them, you need to call the `login` API to drive the SDK into the `ready` status.
+let onSdkNotReady = function(event) {
+  // To use features such as message sending, you need to drive the SDK to enter the `ready` status and then call the login API again as follows:
+  tim.login({userID: 'kita12345', userSig: genTestUserSig.userSig});
+};
+onSdkNotReady()
+tim.on(TIM.EVENT.SDK_NOT_READY, onSdkNotReady);
