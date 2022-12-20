@@ -132,7 +132,7 @@
 				</div>
 			</div>
 			<div class="live-chat-input">
-				<input type="text" class="rounded" placeholder="Type your message.."/> 
+				<input type="text" class="rounded type-message" placeholder="Type your message.."/> 
 			</div>
 		</div>
 	</div>
@@ -153,7 +153,29 @@
 
 	<script src="./lib/lib-generate-test-usersig.min.js"></script>
 	<script src="generate-user-sig.js"></script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+	<script src="util.js"></script>
+
 	<script src="chat.js"></script>
+
+	<script src="handle.js"></script>
+
+	<script>
+		$(document).ready(function(){
+
+			$('.type-message').keyup(function(event){
+				if (event.keyCode == 13){
+					var message = $(this).val();
+					userLogin();
+					joinGroup()
+					userSendMessage(message)
+				}
+			});
+
+		});
+	</script>
 
 </body>
 

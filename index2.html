@@ -1,14 +1,178 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Receive</title>
-    </head>
-    <body>
-        <script src="./lib/tim-js.js"></script>
-        <script src="./lib/tim-upload-plugin/index.js"></script>
 
-        <script src="./lib/lib-generate-test-usersig.min.js"></script>
-        <script src="generate-user-sig.js"></script>
-        <script src="receive.js"></script>
-    </body>
+<head>
+	<title>Live commerce</title>
+	<link href="https://web.sdk.qcloud.com/player/tcplayer/release/v4.6.0/tcplayer.min.css" rel="stylesheet" />
+	<!--If you want to play back WebRTC videos through HTML5 in a modern browser such as Chrome and Firefox, you need to import `TXLivePlayer-x.x.x.min.js` before importing `tcplayer.vx.x.x.min.js`.-->
+	<!--Some browser environments don't support WebRTC. In such cases, the player will automatically convert a WebRTC URL to an HLS URL. Therefore, you also need to import `hls.min.x.xx.xm.js` in WebRTC live streaming scenarios.-->
+	<script src="https://web.sdk.qcloud.com/player/tcplayer/release/v4.6.0/libs/TXLivePlayer-1.2.3.min.js"></script>
+	<!--If you want to play back HLS videos through HTML5 in a browser such as Chrome and Firefox, you need to import `hls.min.x.xx.xm.js` before importing `tcplayer.vx.x.x.min.js`.-->
+	<script src="https://web.sdk.qcloud.com/player/tcplayer/release/v4.6.0/libs/hls.min.1.1.5.js"></script>
+	<!--If you want to play back FLV videos through HTML5 in a modern browser such as Chrome and Firefox, you need to import `flv.min.x.x.x.js` before importing `tcplayer.vx.x.x.min.js`.-->
+	<script src="https://web.sdk.qcloud.com/player/tcplayer/release/v4.6.0/libs/flv.min.1.6.3.js"></script>
+	<!--If you want to play back DASH videos through HTML5 in a modern browser such as Chrome and Firefox, you need to import `dash.min.x.x.x.js` before importing `tcplayer.vx.x.x.min.js`.-->
+	<script src="https://web.sdk.qcloud.com/player/tcplayer/release/v4.6.0/libs/dash.all.min.4.4.1.js"></script>
+	<!--Player script file-->
+	<script src="https://web.sdk.qcloud.com/player/tcplayer/release/v4.6.0/tcplayer.v4.6.0.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<style>
+		.wrap{
+			margin: auto;
+			text-align: center;
+		}
+		.video-el {
+			margin: auto;
+		}
+
+		.live {
+			position: relative;
+		}
+		.live .live-text {
+			position: absolute;
+			left: 42%;
+			background: red;
+			padding: 5px 15px;
+			z-index: 2;
+			color: white;
+			top: 2%;
+			border-radius: 10px;
+		}
+
+		.live .live-icon {
+			position: absolute;
+			left: 56%;
+			color: white;
+			z-index: 2;
+    		top: 2%;
+		}
+
+		.live-chat-input {
+			width: 360px;
+			margin: auto;
+			background: #00000099;
+			padding: 20px 0px;
+		}
+		input.rounded {
+			border: 1px solid #ccc;
+			-moz-border-radius: 10px;
+			-webkit-border-radius: 10px;
+			border-radius: 20px;
+			-moz-box-shadow: 2px 2px 3px #666;
+			-webkit-box-shadow: 2px 2px 3px #666;
+			box-shadow: 2px 2px 3px #666;
+			font-size: 16px;
+			padding: 10px;
+			outline: 0;
+			-webkit-appearance: none;
+			width: 260px;
+			/* border-radius: 4px; */
+		}
+		input.rounded:focus {
+			border-color: #339933;
+		}
+
+		.live-chat-content {
+			position: absolute;
+			left: 42%;
+			bottom: 18%;
+			color: #ffffff61;
+		}
+
+		.user-chat {
+			display: flex;
+			align-items: center;
+			margin-bottom: 10px;
+		}
+		.user-chat img {
+			width: 25%;
+			margin-right: 4px;
+		}
+		.chat-text{
+			font-size: 12px;
+		}
+		.chat-block {
+			text-align: left;
+		}
+        .user-join {
+            position: absolute;
+			left: 42%;
+			bottom: 42%;
+			color: #ffffff61;
+            font-size: 20px;
+        }
+	</style>
+</head>
+
+<body>
+
+	<div class="wrap">
+		<h1>Live Commerce</h1>
+		<h3>Never give up</h3>
+		<div class="live">
+			<div class="live-text">
+				<span>LIVE</span>
+			</div>
+			<div class="live-icon">
+				<i class="fa fa-eye"></i>
+				<span>234</span>
+			</div>
+			<div class="live-video">
+				<video class="video-el" id="player-container-id" width="360" height="540" preload="auto" playsinline webkit-playsinline>
+				</video>
+			</div>
+            <div class="user-join">
+                <span class="user-join-name"></span>
+            </div>
+			<div class="live-chat-content">
+				<div class="user-chat">
+					<img src="img/icons-boy.png">
+					<div class="chat-block">
+						<div>Kita</div>
+						<div class="chat-text">Hi Everyone</div>
+					</div>
+				</div>
+				<div class="user-chat">
+					<img src="img/icons-girl.png">
+					<div class="chat-block">
+						<div>taylor swift</div>
+						<div class="chat-text">Have a nice day</div>
+					</div>
+				</div>
+			</div>
+			<div class="live-chat-input">
+				<input type="text" class="rounded type-message" placeholder="Type your message.."/> 
+			</div>
+		</div>
+	</div>
+
+
+	<script>
+		var player = TCPlayer('player-container-id', {}); // player-container-id is the player container ID, which must be the same as that in HTML
+
+		var url = "webrtc://kitahome.fun/live/kitaWeb_livetp";
+
+		player.src(url); // Playback URL
+	</script>
+
+	<!-- tim-js.js 和 tim-upload-plugin.js 可以从 https://github.com/TencentCloud/TIMSDK/tree/master/Web/IMSDK 获取 -->
+
+	<script src="./lib/tim-js.js"></script>
+	<script src="./lib/tim-upload-plugin/index.js"></script>
+
+	<script src="./lib/lib-generate-test-usersig.min.js"></script>
+	<script src="generate-user-sig.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+	<script src="util.js"></script>
+    <script src="receive.js"></script>
+    <!-- <script src="handle.js"></script> -->
+    <script>
+        $(document).ready(function(){
+            $('.user-join').fadeOut( 5000 );
+        });
+    </script>
+</body>
+
 </html>
