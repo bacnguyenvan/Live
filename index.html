@@ -158,12 +158,13 @@
 		$(document).ready(function(){
 
 			$('.type-message').keyup(function(event){
+
 				if (event.keyCode == 13){
 					var message = $(this).val();
 					userLogin();
 					joinGroup()
 					userSendMessage(message)
-
+					// receiveMessage()
 					event.currentTarget.value = "";
 				}
 			});
