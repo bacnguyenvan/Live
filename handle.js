@@ -1,14 +1,15 @@
 function joinGroup() {
     let onSdkReady = function (event) {
-        let promise = tim.joinGroup({ groupID: '@TGS#3ZQWSOE5CF', type: TIM.TYPES.GRP_MEETING });
+        let promise = tim.joinGroup({ groupID: '@TGS#a52FSOE5C4', type: TIM.TYPES.GRP_AVCHATROOM  });
         promise.then(function (imResponse) {
             switch (imResponse.data.status) {
                 case TIM.TYPES.JOIN_STATUS_WAIT_APPROVAL: // Waiting to be approved by the admin
                     break;
                 case TIM.TYPES.JOIN_STATUS_SUCCESS: // Joined the group successfully
                     var memberNum = imResponse.data.group.memberNum
+                    console.log("join success")
                     console.log("memberNum: ", memberNum)
-                    userSendMessage(memberNum)
+                    // userSendMessage(memberNum)
                     $('.number-view').text(memberNum)
                     break;
                 case TIM.TYPES.JOIN_STATUS_ALREADY_IN_GROUP: // The user is already in the group
@@ -44,15 +45,16 @@ function userLogin() {
 
 function userSendMessage(content = "111") {
     let onSdkReady = function (event) {
-        let message = tim.createTextMessage({ to: '@TGS#3ZQWSOE5CF', conversationType: TIM.TYPES.CONV_GROUP, payload: { text: content } });
+        let message = tim.createTextMessage({ to: '@TGS#a52FSOE5C4', conversationType: 'GROUP', payload: { text: content } });
         tim.sendMessage(message);
     };
+    // onSdkReady()
     tim.on(TIM.EVENT.SDK_READY, onSdkReady);
 }
 
 function getGroupMembers() {
     let onSdkReady = function (event) {
-        let promise = tim.getGroupMemberList({ groupID: '@TGS#3ZQWSOE5CF', count: 30, offset: 0 }); // Pull 30 group members starting from 0
+        let promise = tim.getGroupMemberList({ groupID: '@TGS#a52FSOE5C4', count: 30, offset: 0 }); // Pull 30 group members starting from 0
         promise.then(function (imResponse) {
             console.log("member: ");
             console.log(imResponse); // Group member list
@@ -89,7 +91,27 @@ function receiveMessage() {
         // $('.user-chat').append('<div class="chat-block"><span class="user-name">' + data.from + ': </span><span class="chat-text">' + data.payload.text  + '</span></div>')
         // }
         
-        console.log("m: ", event.data)
+        console.log("m receive: ", event)
     };
-  tim.on(TIM.EVENT.MESSAGE_RECEIVED, onMessageReceived);
+    onMessageReceived()
+//   tim.on(TIM.EVENT.MESSAGE_RECEIVED, onMessageReceived);
+}
+
+function groupUpdated() {
+    let onGroupUpdated = function(event) {
+        // event.data - An array that stores Message objects - [Message]
+        // var name = this.makeid(8)
+        // // $('.user-join-name').text( name + " Đã tham gia" );
+        var data = event.data;
+        if(data.length > 0) {
+            data = data[0];
+            var num = data.lastMessage.payload.text
+            $('.number-view').text(num)
+            // $('.user-chat').append('<div class="chat-block"><span class="user-name">' + data.from + ': </span><span class="chat-text">' + data.payload.text  + '</span></div>')
+        }
+        
+        console.log("m updated: ", event.data)
+    };
+    tim.on(TIM.EVENT.GROUP_LIST_UPDATED, onGroupUpdated)
+    receiveMessage()
 }

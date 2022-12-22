@@ -28,11 +28,12 @@ let onMessageReceived = function(event) {
   var data = event.data;
   if(data.length > 0) {
     data = data[0];
-    if (data.payload.text)
-      $('.user-chat').append('<div class="chat-block"><span class="user-name">' + data.from + ': </span><span class="chat-text">' + data.payload.text  + '</span></div>')
+    if (data.payload.memberCount)
+    $('.number-view').text(data.payload.memberCount)
+      // $('.user-chat').append('<div class="chat-block"><span class="user-name">' + data.from + ': </span><span class="chat-text">' + data.payload.text  + '</span></div>')
   }
   
-  console.log("m: ", event.data)
+  console.log("m RECEIVE: ", event.data)
 };
 tim.on(TIM.EVENT.MESSAGE_RECEIVED, onMessageReceived);
 

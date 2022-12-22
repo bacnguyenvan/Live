@@ -109,7 +109,7 @@
 			</div>
 			<div class="live-icon">
 				<i class="fa fa-eye"></i>
-				<span>234</span>
+				<span class="number-view">234</span>
 			</div>
 			<div class="live-video">
 				<video class="video-el" id="player-container-id" width="360" height="540" preload="auto" playsinline webkit-playsinline>
@@ -156,15 +156,19 @@
 
 	<script>
 		$(document).ready(function(){
+			userLogin();
+			joinGroup();
+			userSendMessage('50')
+			// receiveMessage();
+			// setInterval(receiveMessage,3000);
 
 			$('.type-message').keyup(function(event){
 
 				if (event.keyCode == 13){
 					var message = $(this).val();
-					userLogin();
-					joinGroup()
-					userSendMessage(message)
-					// receiveMessage()
+					alert(message)
+					userSendMessage('51')
+					groupUpdated()
 					event.currentTarget.value = "";
 				}
 			});
