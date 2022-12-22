@@ -80,21 +80,21 @@ function getMessageList() {
 
 
 function receiveMessage() {
-    // This event is triggered when the SDK receives a newly pushed one-to-one message, group message, group tip, or group system message. When this event occurs, you can traverse event.data to obtain the message list and render it to the UI.
     let onMessageReceived = function(event) {
         // event.data - An array that stores Message objects - [Message]
-        // var name = this.makeid(8)
-        // // $('.user-join-name').text( name + " Đã tham gia" );
-        // var data = event.data;
-        // if(data.length > 0) {
-        // data = data[0];
-        // $('.user-chat').append('<div class="chat-block"><span class="user-name">' + data.from + ': </span><span class="chat-text">' + data.payload.text  + '</span></div>')
-        // }
+        var name = this.makeid(8)
+        // $('.user-join-name').text( name + " Đã tham gia" );
+        var data = event.data;
+        if(data.length > 0) {
+          data = data[0];
+          if (data.payload.memberCount)
+          $('.number-view').text(data.payload.memberCount)
+            // $('.user-chat').append('<div class="chat-block"><span class="user-name">' + data.from + ': </span><span class="chat-text">' + data.payload.text  + '</span></div>')
+        }
         
-        console.log("m receive: ", event)
-    };
-    onMessageReceived()
-//   tim.on(TIM.EVENT.MESSAGE_RECEIVED, onMessageReceived);
+        console.log("m RECEIVE: ", event.data)
+      };
+      tim.on(TIM.EVENT.MESSAGE_RECEIVED, onMessageReceived);
 }
 
 function groupUpdated() {
